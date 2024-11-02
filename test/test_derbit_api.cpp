@@ -13,10 +13,6 @@ DerbitApi derbit_api = DerbitApi(client_id_val, client_secret_val, base_url);
 class DerbitApiTest : public ::testing::Test
 {
 protected:
-  static void SetUpTestSuite()
-  {
-  }
-
   void TearDown() override
   {
     derbit_api.cancel_order(label);
