@@ -67,9 +67,13 @@ void DerbitApi::modify_order(const std::string &label, const std::string &token,
   nlohmann::json response = http_client.fetch(url, token);
 }
 
-void DerbitApi::getOrderBook(const std::string &symbol)
+nlohmann::json DerbitApi::get_orderbook(const std::string &instrument)
 {
-  std::cout << "Fetching Order Book for Symbol: " << symbol << std::endl;
+  const std::string url = std::format("https://test.deribit.com/api/v2/public/get_order_book?depth=5&instrument_name={}", instrument);
+
+  nlohmann::json response = http_client.fetch(url, "");
+
+  return response["result"];
 }
 
 void DerbitApi::viewCurrentPositions()

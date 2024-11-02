@@ -42,7 +42,7 @@ public:
 
   void modify_order(const std::string &label, const std::string &token, const std::string &instrument, double amount, double price);
 
-  void getOrderBook(const std::string &symbol);
+  nlohmann::json get_orderbook(const std::string &instrument);
 
   void viewCurrentPositions();
 
