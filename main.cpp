@@ -22,17 +22,21 @@ int main()
 
   std::string symbol = "BTC";
   float amount = 1.0;
-  std::string label = "order-" + std::to_string(timestamp);
+  // std::string label = "order-" + std::to_string(timestamp);
+  std::string label = "order-1730540220";
   SCOPE scope = SCOPE::FUTURES;
   ORDER_TYPE order_type = ORDER_TYPE::SELL;
   ORDER_NAME order_name = ORDER_NAME::MARKET;
 
   std::string instrument = derbit_api.get_instrument(symbol, SCOPE::SPOT);
 
-  nlohmann::json response = derbit_api.place_order(order_type, order_name, token, label, instrument, amount);
+  derbit_api.place_order(order_type, order_name, token, label, instrument, amount);
 
-  std::cout << "Response JSON:\n"
-            << response.dump(4) << std::endl;
+  // derbit_api.cancel_order(label, token);
+
+  nlohmann::json response = derbit_api.get_order_by_label(symbol, label, token);
+
+  std::cout << response;
 
   return 0;
 }

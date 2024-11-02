@@ -2,6 +2,8 @@ project(TradingBot)
 
 enable_testing()
 
+add_subdirectory(test)
+
 set(CMAKE_CXX_STANDARD 20)
 
 find_package(CURL REQUIRED)
@@ -16,5 +18,3 @@ add_library(http_client libs/http_client/http_client.cpp)
 
 add_executable(main main.cpp)
 target_link_libraries(main http_client derbit_api utils CURL::libcurl)
-
-add_subdirectory(test)
