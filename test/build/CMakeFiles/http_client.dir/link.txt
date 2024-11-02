@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libhttp_client.a "CMakeFiles/http_client.dir/Users/iamyxsh/Personal/test-cpp/libs/http_client/http_client.o"
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libhttp_client.a

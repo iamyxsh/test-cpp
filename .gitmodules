@@ -7,3 +7,6 @@
 [submodule "third_party/json"]
 	path = third_party/json
 	url = git@github.com:nlohmann/json.git
+[submodule "third_party/fmt"]
+	path = third_party/fmt
+	url = git@github.com:fmtlib/fmt.git

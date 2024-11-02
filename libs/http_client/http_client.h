@@ -9,7 +9,7 @@ public:
   HttpClient();
   ~HttpClient();
 
-  nlohmann::json fetchJson(const std::string &url);
+  nlohmann::json fetch(const std::string &url, const std::string &authToken);
 
 private:
   void initializeCurl();

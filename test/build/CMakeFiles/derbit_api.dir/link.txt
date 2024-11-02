@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libderbit_api.a "CMakeFiles/derbit_api.dir/Users/iamyxsh/Personal/test-cpp/libs/derbit_api/derbit_api.o"
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libderbit_api.a
