@@ -9,8 +9,9 @@ std::string client_secret_val = "XMKoU4hTgr2z0SYFpylgo5qqGkwoX-BTEwTnHjBDyac";
 DerbitApi derbit_api(client_id_val, client_secret_val);
 std::string symbol = "BTC";
 float amount = 1.0;
+float price = 10.0;
 std::string label = "order-" + std::to_string(timestamp);
-SCOPE scope = SCOPE::FUTURES;
+SCOPE scope = SCOPE::SPOT;
 ORDER_TYPE order_type = ORDER_TYPE::SELL;
 ORDER_NAME order_name = ORDER_NAME::MARKET;
 
@@ -27,11 +28,35 @@ std::string token = derbit_api.get_token();
 //   EXPECT_EQ(response["label"], label);
 // }
 
-TEST(DerbitAPITest, CancelOrder)
+TEST(DerbitAPITest, ModifyOrder)
 {
   std::string instrument = derbit_api.get_instrument(symbol, scope);
+  order_name = ORDER_NAME::LIMIT;
+  order_type = ORDER_TYPE::BUY;
+  nlohmann::json response = derbit_api.place_order(order_type, order_name, token, label, instrument, amount, price);
+  response = derbit_api.get_order_by_label(symbol, label, token);
 
-  derbit_api.place_order(order_type, order_name, token, label, instrument, amount);
+  EXPECT_EQ(response["label"], label);
+  EXPECT_EQ(response["amount"], amount);
+  EXPECT_EQ(response["price"], price);
+
+  double new_amount = 1.2;
+  double new_price = 9.5;
+
+  derbit_api.modify_order(label, token, instrument, new_amount, new_price);
+
+  response = derbit_api.get_order_by_label(symbol, label, token);
+
+  EXPECT_EQ(response["label"], label);
+  EXPECT_EQ(response["amount"], new_amount);
+  EXPECT_EQ(response["price"], new_price);
+}
+
+TEST(DerbitAPITest, CancelOrder)
+{
+  // std::string instrument = derbit_api.get_instrument(symbol, scope);
+
+  // derbit_api.place_order(order_type, order_name, token, label, instrument, amount, 0);
 
   derbit_api.cancel_order(label, token);
 
